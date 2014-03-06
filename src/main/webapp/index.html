@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <title>Decision Tree for Pest Incidence</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/prettify.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class='container'>
+		
+		<div class="span12">
+			<section id="wizard">
+			  <div class="page-header">
+	            <h1>Decision Tree for Pest Incidence</h1>
+	          </div>
+	
+				<div id="rootwizard" class="tabbable tabs-left">
+				
+					<ul>
+					  	<li><a href="#import" data-toggle="tab" id="import">Step 1 - Import Data</a></li>
+						<li><a href="#varSelect"  data-toggle="tab" id="varSelect">Step 2 - Variable Selection</a></li>
+						<li><a href="#phaseSelect"  data-toggle="tab" id="phaseSelect">Step 3 - Phase Selection</a></li>
+						<li><a href="#classAssignment"  data-toggle="tab" id="classAssignment" >Step 4 - Class Assignment</a></li>
+						<li><a href="#labelSelect"  data-toggle="tab" id="labelSelect">Step 5 - Label Selection</a></li>
+						<li><a href="#assignBin"   data-toggle="tab" id="assignBin">Step 6 - Assign Bin</a></li>
+						<li><a href="#attrSelect"   data-toggle="tab" id="attrSelect">Step 7 - Attribute Selection</a></li>
+						<li><a href="#decisionTree"  data-toggle="tab" id="decisionTree" >Step 8 - Decision Tree</a></li>
+						<li><a href="#analysis"  data-toggle="tab" id="analysis">Step 9 - Analysis</a></li>
+					</ul>
+					<div id="bar" class="progress progress-striped active">
+					  <div class="bar"></div>
+					</div>
+					<div class="tab-content">
+					
+					    <div ng-view></div>
+					    
+						<!-- Check http://code.realcrowd.com/the-wonderful-wizard-of-angularjs/ for forward backward using anuglarJS with Bootstrap
+						<ul class="pager wizard">
+							<li class="previous"><a href="#">Previous</a></li>
+						  	<li class="next"><a href="#">Next</a></li>
+						</ul>-->
+					</div>	
+				</div>
+			</section>
+ 		</div>
+	</div>
+	
+    <script src="lib/jquery-1.11.0.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+	<script src="lib/jquery.bootstrap.wizard.js"></script>
+	<script src="lib/prettify.js"></script>
+	
+	<script src="lib/angular.min.js"></script>
+    <script src="lib/angular-file-upload.min.js"></script>
+	<script src="lib/angular-route.min.js"></script>
+	<script src="lib/underscore-min.js"></script>
+    <script src="lib/restangular.min.js"></script>
+  
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+	
+	<script>
+	$(document).ready(function() {
+	  	$('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+			var $total = navigation.find('li').length;
+			var $current = index+1;
+			var $percent = ($current/$total) * 100;
+			$('#rootwizard').find('.bar').css({width:$percent+'%'});
+		},'tabClass': 'nav nav-tabs'});	
+		window.prettyPrint && prettyPrint()
+	});	
+	</script>
+  </body>
+</html>

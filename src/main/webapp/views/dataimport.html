@@ -1,0 +1,32 @@
+<div class="tab-pane" id="tab1">
+            <h3><span>Upload Input</span> Data        </h3>
+			<h4>Unsupervised Training</h4>
+            <form ng-controller="ImportController" >
+			<table width="533">
+				<tr>
+					<td width="210"><label>Upload the file</label></td>
+					<td width="236"><input type="file" ng-file-select="onFileSelect($files)" ></td>
+					<td width="49"><button class="btn btn-info" ng-click="sendReq()" type="submit">Upload</button></td>
+				</tr>
+				<br>
+			</table>
+			</form>
+			<h3>(or)</h3>
+			<h4>Supervised Training and Testing</h4>
+			<form ng-controller="ImportController" >
+			<table width="533">
+			<tr>
+				<td width="210"><label>Upload the training file</label></td>
+				<td width="236"><input type="file" name="trainingFile" ng-file-select="onFileSelect($files)"></td>
+			</tr>
+			</table>
+			<br>
+			<table width="533">
+			<tr>
+				<td width="210"><label>Upload the test file</label></td>
+				<td width="236"><input type="file" name="testFile" ng-file-select="onFileSelect($files)"></td>
+				<td width="49"><button class="btn btn-info" ng-click="sendReq()" type="submit">Upload</button></td>
+			</tr>
+			</table>
+			</form>	
+</div>
