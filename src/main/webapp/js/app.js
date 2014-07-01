@@ -3,12 +3,11 @@
 angular.module('myApp', ['ngRoute', 'restangular', 'angularFileUpload', 'myApp.services', 'myApp.controllers']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/import', {templateUrl: 'views/dataimport.html'});
-	$routeProvider.when('/varSelect', {templateUrl: 'views/varselect.html', controller: 'FakeController'});
-	$routeProvider.when('/phaseSelect', {templateUrl: 'views/phaseselect.html', controller: 'FakeController'});
-	$routeProvider.when('/classAssignment', {templateUrl: 'views/classassignment.html', controller: 'FakeController'});
-	$routeProvider.when('/labelSelect', {templateUrl: 'views/labelselect.html', controller: 'FakeController'});
-	$routeProvider.when('/assignBin', {templateUrl: 'views/assignbin.html', controller: 'FakeController'});
-	$routeProvider.when('/attrSelect', {templateUrl: 'views/attrselect.html', controller: 'FakeController'});
+	$routeProvider.when('/filterSelect', {templateUrl: 'views/filterselect.html', controller: 'FilterController'});
+	$routeProvider.when('/classAssign', {templateUrl: 'views/classassign.html', controller: 'FakeController'});
+	$routeProvider.when('/attrRemoval', {templateUrl: 'views/attrremoval.html', controller: 'FakeController'});
+	$routeProvider.when('/testMethod', {templateUrl: 'views/testmethod.html', controller: 'FakeController'});
+	$routeProvider.when('/algoSelect', {templateUrl: 'views/algoselect.html', controller: 'FakeController'});
 	$routeProvider.when('/decisionTree', {templateUrl: 'views/decisiontree.html', controller: 'FakeController'});
 	$routeProvider.when('/analysis', {templateUrl: 'views/analysis.html', controller: 'FakeController'});
 	$routeProvider.otherwise({redirectTo: '/import'});
@@ -27,4 +26,4 @@ angular.module('myApp', ['ngRoute', 'restangular', 'angularFileUpload', 'myApp.s
         }
         return elem;
       });
-  }]);;
+  }]);

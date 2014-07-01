@@ -1,7 +1,8 @@
-package org.nbaii.pic.api;
+package weka.web.api;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
@@ -11,12 +12,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.nbaii.pic.data.Track;
-import org.nbaii.pic.handler.ImportHandler;
-import org.nbaii.pic.handler.Result;
+import org.apache.poi.util.IOUtils;
+
+import weka.web.handler.ImportHandler;
+import weka.web.handler.Result;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
@@ -39,19 +42,32 @@ public class DataImportApiResource {
 		   if(result.isSuccess()) {
 			   result = handler.save();
 		   }
-           return Response.status(200).entity("{Status : Success}").build();
- 
+		   if(result.isSuccess())
+		   	   return Response.status(200).entity("Status : Success").build();
+		   else
+			   return Response.status(500).entity("Error : " + result.getErrors().get(0)).build();
 	}
 	
+	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Track getTrackInJSON() {
+	@Produces("application/vnd.ms-excel")
+	public Response getFile() {
 		 
-		Track track = new Track();
-		track.setTitle("Enter Sandman");
-		track.setSinger("Metallica");
- 
-		return track;
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream("Soyabean.xls");
+		StreamingOutput stream = new StreamingOutput() {
+			@Override public void write(OutputStream output) throws IOException {
+				try {  
+					IOUtils.copy(is, output);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					is.close();
+					output.close();
+				}
+			  } 
+		};
+		return Response.ok(stream, "application/vnd.ms-excel")
+			.header("content-disposition", "attachment; filename = Soyabean.xls").build();
 	}
 
 }

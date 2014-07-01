@@ -1,4 +1,4 @@
-package org.nbaii.pic.api;
+package weka.web.api;
 
 public class ClassAssignmentApiResource {
 
