@@ -13,7 +13,7 @@ angular.module('myApp', ['ngRoute', 'restangular', 'angularFileUpload', 'myApp.s
 	$routeProvider.otherwise({redirectTo: '/import'});
   }]).
   config(['RestangularProvider', function(RestangularProvider) {
-      RestangularProvider.setBaseUrl('http://localhost:8080/pest-incidence/api'); 
+      RestangularProvider.setBaseUrl('http://localhost:8080/pest-incidence/api/v1/'); 
 	  RestangularProvider.setDefaultHeaders({ 'Accept': 'text/html,application/json;q=0.9,*/*;q=0.8' });
       RestangularProvider.setRestangularFields({
         id: '_id.$oid'

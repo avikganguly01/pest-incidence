@@ -8,11 +8,14 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import weka.web.data.DatabaseHelper;
 
 public class ImportHandler {
 	
+	private static final Logger logger = LoggerFactory.getLogger(ImportHandler.class);
 	
 	private Sheet sheet;
 	private LinkedHashMap<String, String> metadata;
@@ -29,13 +32,22 @@ public class ImportHandler {
 	public Result preprocess() {
 		Result result = new Result();
 		try{
-			noOfCols = sheet.getRow(0).getLastCellNum();
-			CheckPerformer checks = new CheckPerformer(noOfCols);
+			noOfCols = 0;
 			Row headers = sheet.getRow(0);
+			for(int i=0; i < headers.getLastCellNum(); i++) {
+				if(headers.getCell(i) != null &&
+						headers.getCell(i).getCellType() != Cell.CELL_TYPE_BLANK)
+					noOfCols++;
+			}
+			CheckPerformer checks = new CheckPerformer(noOfCols);
+			
 			checks.checkHeaderLengths(headers);
+			logger.info("A-"+sheet.getLastRowNum());
 			sheet = checks.filterOutRowsWithNull(sheet);
+			logger.info("B-"+sheet.getLastRowNum());
 			metadata = checks.checkColumnHomogeneity(sheet);
 		} catch(Exception e) {
+			e.printStackTrace();
 			result.addError(e.getMessage());
 		}
 		return result;
@@ -62,7 +74,8 @@ public class ImportHandler {
 	
 	private void addAllEntries(Statement statement)throws SQLException {
 		String entry = "";
-		for(int rowNo = 1; rowNo < sheet.getLastRowNum(); rowNo++) {
+		logger.info("C-"+sheet.getLastRowNum());
+		for(int rowNo = 1; rowNo <= sheet.getLastRowNum(); rowNo++) {
 			entry = new String();
 			entry = "insert into `training` values(";
 			for(int cellNo = 0; cellNo < noOfCols; cellNo++) {

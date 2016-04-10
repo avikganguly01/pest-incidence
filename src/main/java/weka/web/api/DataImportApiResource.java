@@ -24,7 +24,6 @@ import weka.web.handler.Result;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
-
 @Path("/import")
 public class DataImportApiResource {
 	
@@ -34,10 +33,8 @@ public class DataImportApiResource {
 	public Response uploadFile(
 			@FormDataParam("file") InputStream fileInputStream,
 			@FormDataParam("file") FormDataContentDisposition contentDispositionHeader) throws IOException,SQLException,ClassNotFoundException {
-		
 		   Workbook workbook = new HSSFWorkbook(fileInputStream);
-		   
-           ImportHandler handler = new ImportHandler(workbook);
+		   ImportHandler handler = new ImportHandler(workbook);
 		   Result result = handler.preprocess();
 		   if(result.isSuccess()) {
 			   result = handler.save();
@@ -45,7 +42,7 @@ public class DataImportApiResource {
 		   if(result.isSuccess())
 		   	   return Response.status(200).entity("Status : Success").build();
 		   else
-			   return Response.status(500).entity("Error : " + result.getErrors().get(0)).build();
+			   return Response.status(400).entity("Error : " + result.getErrors().get(0)).build();
 	}
 	
 	

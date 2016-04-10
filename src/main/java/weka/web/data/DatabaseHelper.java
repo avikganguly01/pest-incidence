@@ -6,12 +6,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class DatabaseHelper {
 	
-	private static final Logger logger = LoggerFactory.getLogger(DatabaseHelper.class);
+//	private static final Logger logger = LoggerFactory.getLogger(DatabaseHelper.class);
 	
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/pestincidence";
@@ -61,7 +58,7 @@ public class DatabaseHelper {
 		try {
 			statement.close();
 		} catch (SQLException e) {
-			logger.info("Error while closing connection");
+//			logger.info("Error while closing connection");
 		}
 	}
 	
@@ -71,12 +68,12 @@ public class DatabaseHelper {
 			Class.forName(DB_DRIVER);
 			connection = DriverManager
 					.getConnection(DB_CONNECTION,DB_USER, DB_PASSWORD);
-			if (connection == null) 
-				logger.info("Failed to make connection!");
+//			if (connection == null) 
+//				logger.info("Failed to make connection!");
 		} catch (ClassNotFoundException e) {
-			logger.error("Failed to load driver.");
+//			logger.error("Failed to load driver.");
 		} catch (SQLException sqe) {
-			logger.error("Failed to establish connection");
+//			logger.error("Failed to establish connection");
 		}
 	 
 		return connection;

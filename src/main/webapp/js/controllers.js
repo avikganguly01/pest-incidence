@@ -10,7 +10,7 @@ angular.module('myApp.controllers', []).
 	   $scope.uploadMessage;
 	   $scope.sendReq = function() {
 	     $scope.upload = $upload.upload({
-          url: 'api/import', 
+          url: 'api/v1/import', 
           method: "POST",
           file: $scope.selectedFile
          }).success(function(data, status, headers, config) {
@@ -26,7 +26,7 @@ angular.module('myApp.controllers', []).
   
    controller('DownloadController', ['$scope', 'Restangular', function($scope, Restangular) {
 	   $scope.sendReq = function() {
-		   window.open('/pest-incidence/api/import', '_blank', '');  
+		   window.open('/pest-incidence/api/v1/import', '_blank', '');  
 	   };
   }]).
   

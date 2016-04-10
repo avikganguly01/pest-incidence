@@ -5,11 +5,13 @@ import java.util.LinkedHashMap;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class CheckPerformer {
 	
-//	private static final Logger logger = LoggerFactory.getLogger(CheckPerformer.class);
+	private static final Logger logger = LoggerFactory.getLogger(CheckPerformer.class);
 	
 	private int noOfColumns;
 	private LinkedHashMap<String, String> metadata;
@@ -38,6 +40,7 @@ public class CheckPerformer {
 			for(int cellNo = 0; cellNo < noOfColumns; cellNo++) {
 				Cell cell = row.getCell(cellNo);
 				if(cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+					logger.info(rowNo +"-"+cellNo);
 					sheet.removeRow(row);
 					int rowIndex = row.getRowNum();
 			        int lastRowNum = sheet.getLastRowNum();
