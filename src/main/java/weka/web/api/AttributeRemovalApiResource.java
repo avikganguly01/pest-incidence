@@ -10,14 +10,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import weka.web.data.Filter;
 import weka.web.data.RawAttribute;
-import weka.web.handler.FilterHandler;
 import weka.web.handler.RawAttributeHandler;
 import weka.web.handler.Result;
 
-@Path("/filter")
-public class FilterSelectionApiResource {
+@Path("/attrremoval")
+public class AttributeRemovalApiResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -26,7 +24,7 @@ public class FilterSelectionApiResource {
 		   Result result = handler.retrieveAttributes();
 		   ArrayList<RawAttribute> attributes;
 		   if(result.isSuccess()) {
-			   attributes = handler.getAttributes(true, false);
+			   attributes = handler.getAttributes(false, false);
 			   return Response.status(202).entity(attributes).build();
 		   }else
 			   return Response.status(500).entity("Error : " + result.getErrors().get(0)).build();
@@ -35,16 +33,10 @@ public class FilterSelectionApiResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response filterRows(ArrayList<Filter> filters) {
-		FilterHandler handler = new FilterHandler();
-		for(Filter filter : filters) {
-			Result result = handler.filter(filter);
-			if(!result.isSuccess())
-				break;
-			
-		}
+	public Response removingColumns(ArrayList<RawAttribute> attributes) {
+		RawAttributeHandler handler = new RawAttributeHandler();
+		Result result = handler.removeAttributes(attributes);
 		return Response.status(200).entity("Status : Success").build();
 	}
-	
 
 }

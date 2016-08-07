@@ -1,14 +1,20 @@
 <div class="tab-pane" id="tab3">
-					      <h3><span>Select the</span>   Phase</h3>
+					      <h4>Attribute Removal</h4>
 
-            <form method=POST>
-				<table width="447" border="0">
-				<tr class="filter">
-					<td width="93"><input type="radio" name="phase" value="training"><label>Training</label></td>
-					<td width="104"><input type="radio" name="phase" value="testing"><label>Testing</label></td>
-					<td width="135"><input type="radio" name="phase" value="both"><label>Unsupervised</label></td>
-					<td width="97"><input type="submit" name="go" value="Go"></td>
-				</tr>
-				</table>
-			</form>	
-					    </div>
+            <table>
+		<tr ng-repeat="attribute in attributeTypes">
+			<td>
+				<span>{{attribute.attributeName}}({{attribute.attributeType}})</span>
+			</td>
+			<td>
+			<input type='checkbox' ng-model="filters[$index]" class = "form-control"/>
+			</td>
+		</tr>
+	</table>
+<br/><br/><br/>
+			<button class="btn btn-info" ng-click="sendReq()" type="submit" style="margin-top:-10px;">Remove</button>
+			<div>
+   			<div class="alert alert-success" ng-show="status">Success</div>
+			<div class="alert alert-danger" ng-show="status == false">Failure</div>
+			</div>
+ </div>

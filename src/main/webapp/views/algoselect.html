@@ -1,21 +1,32 @@
 <div class="tab-pane" id="tab6">
-					      <h2><span>Select </span> Bin Type    </h2>
-        <form action="assbin.php" method="post">
-          <table width="350">
-            <tr>
-				<td ><input type="radio" name="binType" value="equalBin"/></td>
-				<td width="150"><label>Equal Binning</label></td>
-				<td ><input type="radio" name="binType" value="maxDiff"/>
-				<td width="150"><label>Maximum Difference</label></td>
-			</tr>
-		   </table>	<br/>
-		<h2><span>Enter </span> Bin Value    </h2>
-		<table width="350">
-        <tr>
-		<td width="50"><input type="text" name="bin" id="bin" /></td>
-        <td width="49"><input type="submit" name="assignBin" value="Go"></td>
-        </tr>
-        <br>
-		</table>
+					      <h4>Algorithm & Class Assignment</h4>
+        <form method="post">
+          <select class="form-control" ng-model="algo"  ng-options="algorithm as algorithm for algorithm in init.algorithms">  
+				<option value="" >None</option>
+			</select>
+			<div ng-show='algo' style="margin-left:30px;">
+				<div ng-repeat="class in classes" style="width:100%">
+					<div>
+					<label for="minRange">Range - Minimum</label>
+					<input type="text" ng-model="class.minRange" name="minRange" class="form-control"/>
+					</div>
+					<div>
+					<label for="maxRange">Range - Maximum</label>
+					<input type="text" ng-model="class.maxRange" name="maxRange" class="form-control"/>
+					</div>
+					<div>
+					<label for="assignedClass">Class</label>
+					<input type="text" ng-model="class.assignedClass" name="assignedClass" class="form-control"/>
+					</div>
+				</div>
+				<br/><br/>
+				<button class="btn btn-info" ng-click="addClass()" type="submit" style="margin-top:-10px;">Add Class</button>
+			</div>
+			<br/><br/><br/>
+			<button class="btn btn-info" ng-click="sendReq()" type="submit" style="margin-top:-10px;">Save</button>
+			<div>
+   			<div class="alert alert-success" ng-show="status">Success</div>
+			<div class="alert alert-danger" ng-show="status == false">Failure</div>
+			</div>
         </form>             		
-					    </div>
+ </div>

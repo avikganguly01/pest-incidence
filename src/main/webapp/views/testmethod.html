@@ -1,13 +1,6 @@
 <div class="tab-pane" id="tab4">
-					      <h3>Assign Classes</h3>
-            <form action="assclass.php" method="post">
-        <table>
-        <tr>
-        <td><label>Total No Of Classes</label></td>
-        <td><input type="text" name="class" value="" size="5"/></td>
-     	<td><input type="submit" name="enter" value="Set Class"></td>
-        </tr>
-        </table>
-        </form>
-		<h3><span>Enter the</span> range values</h3>
-					    </div>
+					      <h3>Testing Methodology</h3>
+             <select class="form-control" ng-model="algo"  ng-options="meth as meth for meth in init.meths">  
+				<option value="" >None</option>
+			</select>
+</div>

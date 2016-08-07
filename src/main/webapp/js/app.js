@@ -4,11 +4,10 @@ angular.module('myApp', ['ngRoute', 'restangular', 'angularFileUpload', 'myApp.s
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/import', {templateUrl: 'views/dataimport.html'});
 	$routeProvider.when('/filterSelect', {templateUrl: 'views/filterselect.html', controller: 'FilterController'});
-	$routeProvider.when('/classAssign', {templateUrl: 'views/classassign.html', controller: 'FakeController'});
-	$routeProvider.when('/attrRemoval', {templateUrl: 'views/attrremoval.html', controller: 'FakeController'});
-	$routeProvider.when('/testMethod', {templateUrl: 'views/testmethod.html', controller: 'FakeController'});
-	$routeProvider.when('/algoSelect', {templateUrl: 'views/algoselect.html', controller: 'FakeController'});
-	$routeProvider.when('/decisionTree', {templateUrl: 'views/decisiontree.html', controller: 'FakeController'});
+	$routeProvider.when('/attrRemoval', {templateUrl: 'views/attrremoval.html', controller: 'AttrRemovalController'});
+	$routeProvider.when('/testMethod', {templateUrl: 'views/testmethod.html', controller: 'TestingController'});
+	$routeProvider.when('/algoSelect', {templateUrl: 'views/algoselect.html', controller: 'AlgorithmController'});
+	$routeProvider.when('/decisionTree', {templateUrl: 'views/decisiontree.html', controller: 'TreeController'});
 	$routeProvider.when('/analysis', {templateUrl: 'views/analysis.html', controller: 'FakeController'});
 	$routeProvider.otherwise({redirectTo: '/import'});
   }]).
